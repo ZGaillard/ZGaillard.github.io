@@ -1,0 +1,228 @@
+/* ------------------------------------------------------------------
+   Web CV — mirrors the Awesome-CV LaTeX layout (CV_2026-10)
+   ------------------------------------------------------------------ */
+
+/* Fonts: same families as the PDF (subset, self-hosted) */
+@font-face { font-family: "Source Sans Pro"; src: url("fonts/SourceSansPro-Light.woff2") format("woff2"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans Pro"; src: url("fonts/SourceSansPro-LightIt.woff2") format("woff2"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Source Sans Pro"; src: url("fonts/SourceSansPro-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Source Sans Pro"; src: url("fonts/SourceSansPro-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roboto"; src: url("fonts/Roboto-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Roboto"; src: url("fonts/Roboto-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Roboto"; src: url("fonts/Roboto-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Colors: taken from awesome-cv.cls */
+:root {
+  --bg: #ffffff;
+  --accent: #000059;     /* \definecolor{awesome}{HTML}{000059} */
+  --text: #333333;       /* text      */
+  --darktext: #414141;   /* darktext  */
+  --graytext: #5d5d5d;   /* graytext  */
+  --lighttext: #999999;  /* lighttext */
+  --rule: #5d5d5d;
+
+  --body: "Source Sans Pro", "Source Sans 3", system-ui, sans-serif;
+  --header: "Roboto", system-ui, sans-serif;
+  --measure: 46rem;
+}
+
+/* Dark mode follows the system setting */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121418;
+    --accent: #9fa8ff;
+    --text: #d6d6d6;
+    --darktext: #e6e6e6;
+    --graytext: #a9a9a9;
+    --lighttext: #8a8a8a;
+    --rule: #555a63;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-weight: 300;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration-color: var(--lighttext); text-underline-offset: 0.15em; }
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+
+strong { font-weight: 700; color: var(--darktext); }
+
+.cv {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) 1rem 4rem;
+}
+
+/* ---------- Header ---------- */
+.cv-header { text-align: center; margin-bottom: 2.5rem; }
+
+.name {
+  margin: 0 0 0.6rem;
+  font-family: var(--header);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.3rem);
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.position {
+  margin: 0.15rem 0 0;
+  font-weight: 400;
+  font-variant: small-caps;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+.address {
+  margin: 1rem 0 0.25rem;
+  font-family: var(--header);
+  font-style: italic;
+  color: var(--lighttext);
+}
+
+.social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 0;
+  font-family: var(--header);
+  font-weight: 400;
+}
+.social li { display: inline-flex; align-items: center; gap: 0.4em; }
+.social li + li::before {
+  content: "|";
+  margin: 0 1.1em;
+  color: var(--text);
+}
+.social a { text-decoration: none; overflow-wrap: anywhere; }
+.icon { width: 1em; height: 1em; fill: currentColor; flex: none; }
+
+/* ---------- Sections ---------- */
+section { margin-top: 2.25rem; }
+
+h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  font-size: clamp(1.45rem, 1.2rem + 1vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--accent);
+}
+/* the gray rule after the section title */
+h2::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1.5px solid var(--rule);
+  transform: translateY(-0.2em);
+}
+
+.paragraph { margin: 0; }
+
+/* ---------- Entries ---------- */
+.entry + .entry { margin-top: 1.25rem; }
+
+.entry-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;
+}
+.entry-head h3 {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 1.08em;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--darktext);
+}
+.org {
+  margin: 0;
+  font-weight: 400;
+  font-variant: small-caps;
+  font-size: 0.92em;
+  color: var(--graytext);
+}
+.date {
+  margin: 0;
+  font-style: italic;
+  font-size: 0.88em;
+  color: var(--graytext);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.entry ul {
+  margin: 0.3rem 0 0;
+  padding-left: 1.1rem;
+}
+.entry li { padding-left: 0.15rem; }
+.entry li::marker { color: var(--text); font-size: 0.8em; }
+
+/* ---------- Skills ---------- */
+.skills {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1.25rem;
+  margin: 0;
+}
+.skills > div { display: contents; }
+.skills dt {
+  font-weight: 700;
+  color: var(--darktext);
+  text-align: right;
+}
+.skills dd { margin: 0; }
+
+/* ---------- Honors ---------- */
+.honors { list-style: none; margin: 0; padding: 0; }
+.honors li {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1rem;
+  font-weight: 400;
+  color: var(--graytext);
+}
+.honors time { text-align: right; }
+
+/* ---------- Phone layout ---------- */
+@media (max-width: 600px) {
+  .entry-head { grid-template-columns: 1fr; }
+  .date { text-align: left; }
+
+  .skills { grid-template-columns: 1fr; gap: 0; }
+  .skills dt { text-align: left; }
+  .skills dd { margin-bottom: 0.6rem; }
+
+  .honors li { grid-template-columns: 3rem 1fr; gap: 0.5rem; }
+  .honors time { text-align: left; }
+
+  /* stack contact links instead of pipe separators */
+  .social { flex-direction: column; align-items: center; }
+  .social li + li::before { content: none; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  :root { --bg: #fff; --accent: #000059; --text: #333; --darktext: #414141; --graytext: #5d5d5d; --lighttext: #999; --rule: #5d5d5d; }
+  body { font-size: 10pt; }
+  .cv { padding: 0; max-width: none; }
+  a { text-decoration: none; }
+  .entry, .skills, .honors li { break-inside: avoid; }
+  h2 { break-after: avoid; }
+}

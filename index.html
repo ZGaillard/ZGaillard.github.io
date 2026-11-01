@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zakary Gaillard-Duchassin — CV</title>
+  <meta name="description" content="Développeur — algorithmique et recherche opérationnelle. M.Sc. informatique (recherche opérationnelle), Université de Montréal.">
+  <meta name="color-scheme" content="light dark">
+  <!-- Open Graph (link previews) -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Zakary Gaillard-Duchassin — CV">
+  <meta property="og:description" content="Développeur — algorithmique et recherche opérationnelle. M.Sc. informatique (RO), Université de Montréal.">
+  <meta property="og:locale" content="fr_CA">
+  <!-- i18n plan: French lives at /index.html, English will live at /en/index.html.
+       When it exists, add:
+       <link rel="alternate" hreflang="fr" href="/">
+       <link rel="alternate" hreflang="en" href="/en/">
+       and a FR/EN switch in the header. -->
+  <link rel="preload" href="fonts/SourceSansPro-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/Roboto-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="cv">
+
+  <!-- Every item (.item) has a stable id: the future hover-to-focus
+       feature will attach its extra details to these ids. -->
+
+  <header class="cv-header">
+    <h1 class="name">Zakary Gaillard&#8209;Duchassin</h1>
+    <p class="position">Développeur — algorithmique &amp; recherche opérationnelle</p>
+    <p class="position">M.Sc. informatique (recherche opérationnelle), Université de Montréal</p>
+    <p class="address">Montréal, QC</p>
+    <ul class="social">
+      <li>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm.8 2v.3l8.2 5.5 8.2-5.5V7H3.8Zm16.4 2.7-7.6 5.1a1 1 0 0 1-1.2 0L3.8 9.7V17h16.4V9.7Z"/></svg>
+        <a class="js-email" data-u="zakary.gaillard" data-d="outlook.com" href="#">zakary.gaillard [at] outlook.com</a>
+      </li>
+      <li>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        <a href="https://github.com/ZGaillard">ZGaillard</a>
+      </li>
+    </ul>
+  </header>
+
+  <section id="profil">
+    <h2>Profil</h2>
+    <p class="paragraph item" id="profil-resume">Étudiant à la maîtrise en informatique (recherche opérationnelle), je conçois des algorithmes d'optimisation (programmation linéaire en nombres entiers, génération de colonnes, branch-and-price) et des applications web complètes (React, Java, API REST). Co-auteur d'un article dans <i>Genome Biology</i> (2026). Je cherche un poste en développement axé sur l'algorithmique ou l'optimisation.</p>
+  </section>
+
+  <section id="formation">
+    <h2>Formation</h2>
+
+    <article class="entry item" id="msc">
+      <div class="entry-head">
+        <h3>M.Sc. Informatique — recherche opérationnelle</h3>
+        <p class="org">Université de Montréal</p>
+        <p class="date"><time>2025</time>–auj.</p>
+      </div>
+      <ul>
+        <li>Cours : méthodes de recherche opérationnelle, programmation en nombres entiers.</li>
+      </ul>
+    </article>
+
+    <article class="entry item" id="bsc">
+      <div class="entry-head">
+        <h3>B.Sc. Informatique — cheminement Honor</h3>
+        <p class="org">Université de Montréal</p>
+        <p class="date"><time>2021</time>–<time>2025</time></p>
+      </div>
+      <ul>
+        <li><strong>Moyenne cumulative : 3,89&nbsp;/&nbsp;4,3</strong> ; mention d'excellence à chaque trimestre.</li>
+        <li>Cours réussis avec A+ : algorithmique, structures de données, optimisation linéaire, modèles de recherche opérationnelle, génie logiciel, bases de données, développement web, projet Honor.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="competences">
+    <h2>Compétences</h2>
+    <dl class="skills">
+      <div class="item" id="skill-langages"><dt>Langages</dt><dd>Java • Python • JavaScript/TypeScript • SQL • Bash</dd></div>
+      <div class="item" id="skill-ro"><dt>Optimisation / RO</dt><dd>PL/PLNE • Génération de colonnes • Branch-and-price • Google OR-Tools</dd></div>
+      <div class="item" id="skill-web"><dt>Web</dt><dd>React • API REST</dd></div>
+      <div class="item" id="skill-outils"><dt>Outils</dt><dd>Git/GitHub • GitHub Actions • Maven • JUnit • Linux • Jupyter • LaTeX</dd></div>
+      <div class="item" id="skill-langues"><dt>Langues</dt><dd>Français et anglais (bilingue) • Espagnol (fonctionnel)</dd></div>
+    </dl>
+  </section>
+
+  <section id="experience">
+    <h2>Expérience</h2>
+
+    <article class="entry item" id="rimap-risc">
+      <div class="entry-head">
+        <h3>Développeur full-stack — RIMap-RISC</h3>
+        <p class="org">IRIC, laboratoire du Pr François Major</p>
+        <p class="date"><time>2025</time>–<time>2026</time></p>
+      </div>
+      <ul>
+        <li>Conception et développement du frontend React de RIMap-RISC, plateforme web d'analyse du transcriptome humain.</li>
+        <li>Projet Honor (A+), puis stage d'été (bourse CRSNG) et maîtrise, jusqu'à la mise en production.</li>
+        <li>Interface de requêtes interactive et visualisation en temps réel ; intégration avec un backend Java via une API REST.</li>
+        <li>Co-auteur de l'article décrivant la plateforme, publié dans <i>Genome Biology</i> (2026).</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="projets">
+    <h2>Projets</h2>
+
+    <article class="entry item" id="bpmkp">
+      <div class="entry-head">
+        <h3>Solveur branch-and-price pour le sac à dos multiple</h3>
+        <p class="org">Java • Google OR-Tools • Maven • JUnit 5</p>
+        <p class="date">Automne <time>2025</time></p>
+      </div>
+      <ul>
+        <li>Décomposition de Dantzig–Wolfe et génération de colonnes (sous-problème de sac à dos), arbre de branchement best-first avec élagage par bornes.</li>
+        <li>Coupes no-good et vérification de faisabilité par programmation par contraintes (CP-SAT) pour réparer les affectations fractionnaires.</li>
+        <li>Banc d'essai automatisé sur 179&nbsp;instances : 59&nbsp;% résolues à l'optimalité prouvée, temps médian de 0,64&nbsp;s ; analyse des résultats en Jupyter.</li>
+        <li>Code source : <a href="https://github.com/ZGaillard/BPMKP">github.com/ZGaillard/BPMKP</a></li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="publication">
+    <h2>Publication</h2>
+    <p class="paragraph item" id="pub-rimap">Chasles S., <strong>Gaillard-Duchassin Z.</strong>, Quenneville J., Lemaire M., Gagnon E., Major F. (2026). RIMap-RISC: a transcriptome-wide database of structurally modeled human microRNA interactions. <i>Genome Biology</i>. <a href="https://doi.org/10.1186/s13059-026-04008-y">doi:10.1186/s13059-026-04008-y</a></p>
+  </section>
+
+  <section id="enseignement">
+    <h2>Expérience en enseignement</h2>
+
+    <article class="entry item" id="ta-ift1025">
+      <div class="entry-head">
+        <h3>Auxiliaire d'enseignement</h3>
+        <p class="org">Université de Montréal</p>
+        <p class="date">Automne <time>2025</time></p>
+      </div>
+      <ul>
+        <li>Encadrement pédagogique et soutien en programmation pour le cours IFT1025 — Programmation 2.</li>
+      </ul>
+    </article>
+
+    <article class="entry item" id="studioxp">
+      <div class="entry-head">
+        <h3>Enseignant en création de jeu vidéo</h3>
+        <p class="org">StudioXP</p>
+        <p class="date"><time>2022</time>–auj.</p>
+      </div>
+      <ul>
+        <li>Enseignement parascolaire et vulgarisation auprès de jeunes de 8 à 18&nbsp;ans.</li>
+      </ul>
+    </article>
+
+    <article class="entry item" id="tuteur-cvm">
+      <div class="entry-head">
+        <h3>Tuteur</h3>
+        <p class="org">Cégep du Vieux-Montréal</p>
+        <p class="date"><time>2019</time>–<time>2020</time></p>
+      </div>
+      <ul>
+        <li>Soutien pédagogique en calcul différentiel et biologie cellulaire.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="bourses">
+    <h2>Bourses</h2>
+    <ul class="honors">
+      <li class="item" id="bourse-crsng"><time>2025</time><span>Bourse de recherche de premier cycle du CRSNG (BRPC)</span></li>
+      <li class="item" id="bourse-diro"><time>2022</time><span>Bourse d'excellence du DIRO</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+  // Assemble the e-mail address at runtime so naive scrapers don't harvest it.
+  document.querySelectorAll('.js-email').forEach(function (a) {
+    var addr = a.dataset.u + '@' + a.dataset.d;
+    a.href = 'mailto:' + addr;
+    a.textContent = addr;
+  });
+</script>
+</body>
+</html>
