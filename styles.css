@@ -60,12 +60,23 @@ strong { font-weight: 700; color: var(--darktext); }
 sub, sup { line-height: 0; }
 
 .cv {
+  position: relative;
   max-width: var(--measure);
   margin: 0 auto;
   padding: clamp(2rem, 6vw, 4rem) 1rem 4rem;
 }
 
 /* ---------- Header ---------- */
+.lang-switch {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--header);
+  font-size: 0.9rem;
+}
+.lang-switch a { color: var(--graytext); text-decoration: none; }
+.lang-switch a:hover { color: var(--accent); }
+
 .cv-header { text-align: center; margin-bottom: 2.5rem; }
 
 .name {
@@ -381,7 +392,7 @@ button.tag[aria-pressed="true"] {
   .cv { padding: 0; max-width: none; }
   a { text-decoration: none; }
   .entry, .skills, .honors li { break-inside: avoid; }
-  .hint, .filterbar, .item::before { display: none !important; }
+  .hint, .filterbar, .lang-switch, .item::before { display: none !important; }
   .item, h2, .skills, .cv-header, #profil-resume { opacity: 1 !important; }
   .js .more { grid-template-rows: 1fr; opacity: 1; }
   h2 { break-after: avoid; }

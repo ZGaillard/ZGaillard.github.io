@@ -8,13 +8,22 @@
 (function () {
   'use strict';
 
-  // UI strings — kept together for the future English version.
-  var T = {
-    hintHover: 'Survolez un élément quelques instants pour voir les détails · cliquez sur une compétence pour la retrouver dans le CV.',
-    hintTouch: 'Touchez un élément pour voir les détails · touchez une compétence pour la retrouver dans le CV.',
-    items: function (n) { return n + (n > 1 ? ' éléments' : ' élément'); },
-    next: 'Aller au suivant'
+  // UI strings, by page language (<html lang="…">).
+  var STRINGS = {
+    fr: {
+      hintHover: 'Survolez un élément quelques instants pour voir les détails · cliquez sur une compétence pour la retrouver dans le CV.',
+      hintTouch: 'Touchez un élément pour voir les détails · touchez une compétence pour la retrouver dans le CV.',
+      items: function (n) { return n + (n > 1 ? ' éléments' : ' élément'); },
+      next: 'Aller au suivant'
+    },
+    en: {
+      hintHover: 'Hover over an item for a moment to see details · click a skill to find it in the CV.',
+      hintTouch: 'Tap an item to see details · tap a skill to find it in the CV.',
+      items: function (n) { return n + (n > 1 ? ' items' : ' item'); },
+      next: 'Go to next'
+    }
   };
+  var T = STRINGS[document.documentElement.lang] || STRINGS.fr;
 
   var DWELL_MS = 700;   // how long to hover before an item opens
   var LEAVE_MS = 250;   // grace period before closing when the pointer leaves
