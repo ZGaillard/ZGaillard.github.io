@@ -57,6 +57,7 @@ a { color: inherit; text-decoration-color: var(--lighttext); text-underline-offs
 a:hover { color: var(--accent); text-decoration-color: currentColor; }
 
 strong { font-weight: 700; color: var(--darktext); }
+sub, sup { line-height: 0; }
 
 .cv {
   max-width: var(--measure);
@@ -200,6 +201,159 @@ h2::after {
 }
 .honors time { text-align: right; }
 
+/* ---------- Header hint ---------- */
+.hint {
+  margin: 1.5rem auto 0;
+  max-width: 34rem;
+  font-size: 0.85em;
+  font-style: italic;
+  color: var(--lighttext);
+}
+
+/* ==================================================================
+   Interactive layer (app.js)
+   ================================================================== */
+
+/* ---------- Items ---------- */
+.item { position: relative; }
+
+/* accent bar on the left: fills while hovering, stays while open / matched */
+.item::before {
+  content: "";
+  position: absolute;
+  left: -0.85rem;
+  top: 0.15rem;
+  bottom: 0.15rem;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease;
+}
+.item.is-pending::before { transform: scaleY(1); transition: transform 0.7s linear; }
+.item.is-open::before,
+.filtering .item.match::before { transform: scaleY(1); }
+
+.item.has-more { cursor: pointer; }
+.item.has-more:focus { outline: none; }
+.item.has-more:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* ---------- Dimming: focus mode & filter mode ---------- */
+.cv-header, h2, .skills, #profil-resume, .item {
+  transition: opacity 0.25s ease;
+}
+.has-focus :is(.cv-header, h2, .skills, #profil-resume, .item:not(.is-open)) { opacity: 0.25; }
+.filtering:not(.has-focus) .item:not(.match) { opacity: 0.3; }
+
+/* ---------- Details panel ---------- */
+.more-inner { font-size: 0.95em; }
+.more-inner > :first-child { margin-top: 0.75rem; }
+.more-inner > :last-child { margin-bottom: 0.25rem; }
+.more-inner p { margin: 0.6rem 0 0; }
+.more-inner ul, .more-inner ol { margin: 0.6rem 0 0; padding-left: 1.1rem; }
+.more-inner li + li { margin-top: 0.3rem; }
+.more-inner .links a { font-weight: 400; }
+
+/* animated open/close (grid-rows trick); without JS, details are simply shown */
+.js .more {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.35s ease, opacity 0.3s ease;
+}
+.js .item.is-open .more { grid-template-rows: 1fr; opacity: 1; }
+.js .more-inner { overflow: hidden; min-height: 0; }
+
+/* course tables */
+.courses {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.courses caption {
+  text-align: left;
+  font-weight: 400;
+  font-variant: small-caps;
+  color: var(--graytext);
+  padding-bottom: 0.25rem;
+}
+.courses td { padding: 0.12rem 0; vertical-align: baseline; }
+.courses td:first-child { width: 5.5rem; white-space: nowrap; color: var(--graytext); }
+.courses .grade { width: 2.5rem; text-align: right; font-weight: 700; color: var(--darktext); }
+
+/* stat tiles */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.stats div { display: flex; flex-direction: column; }
+.stats b { font-size: 1.45em; font-weight: 700; line-height: 1.15; color: var(--accent); }
+.stats span { font-size: 0.85em; color: var(--graytext); }
+
+/* ---------- Skill tags ---------- */
+button.tag {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline dotted var(--lighttext);
+  text-underline-offset: 0.2em;
+  border-radius: 3px;
+}
+button.tag:hover { color: var(--accent); text-decoration-color: currentColor; }
+button.tag:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.tag[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--accent);
+  text-decoration: none;
+  box-shadow: 0 0 0 0.18em var(--accent); /* pads the highlight without shifting the layout */
+}
+
+/* ---------- Filter bar ---------- */
+.filterbar {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  max-width: calc(100% - 2rem);
+  padding: 0.35rem 0.4rem 0.35rem 1rem;
+  border-radius: 999px;
+  background: var(--darktext);
+  color: var(--bg);
+  font-weight: 400;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  z-index: 10;
+}
+.filterbar[hidden] { display: none; }
+.filterbar button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+}
+.filterbar-text { padding: 0.15rem 0.4rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#filterbar-clear { width: 1.9rem; height: 1.9rem; line-height: 1; }
+.filterbar button:hover { background: rgba(127, 127, 127, 0.25); }
+.filterbar button:focus-visible { outline: 2px solid var(--bg); outline-offset: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .item::before, .item.is-pending::before, .js .more,
+  .cv-header, h2, .skills, #profil-resume, .item { transition: none; }
+}
+
 /* ---------- Phone layout ---------- */
 @media (max-width: 600px) {
   .entry-head { grid-template-columns: 1fr; }
@@ -211,6 +365,9 @@ h2::after {
 
   .honors li { grid-template-columns: 3rem 1fr; gap: 0.5rem; }
   .honors time { text-align: left; }
+
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .item::before { left: -0.6rem; }
 
   /* stack contact links instead of pipe separators */
   .social { flex-direction: column; align-items: center; }
@@ -224,5 +381,8 @@ h2::after {
   .cv { padding: 0; max-width: none; }
   a { text-decoration: none; }
   .entry, .skills, .honors li { break-inside: avoid; }
+  .hint, .filterbar, .item::before { display: none !important; }
+  .item, h2, .skills, .cv-header, #profil-resume { opacity: 1 !important; }
+  .js .more { grid-template-rows: 1fr; opacity: 1; }
   h2 { break-after: avoid; }
 }

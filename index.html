@@ -16,15 +16,25 @@
        <link rel="alternate" hreflang="fr" href="/">
        <link rel="alternate" hreflang="en" href="/en/">
        and a FR/EN switch in the header. -->
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preload" href="fonts/SourceSansPro-Light.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/Roboto-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
 <main class="cv">
 
-  <!-- Every item (.item) has a stable id: the future hover-to-focus
-       feature will attach its extra details to these ids. -->
+  <!--
+    How the interactive layer works (app.js):
+    - .item            : a CV item. Stable id.
+    - .more            : extra details, revealed by a long hover / tap / Enter.
+                         Without JavaScript they are simply shown.
+    - data-skills      : space-separated skill keys used by this item.
+    - .tag[data-skill] : a skill in the "Compétences" list. Clicking it highlights
+                         every item whose data-skills contains that key. Tags that
+                         match no item stay plain text.
+  -->
 
   <header class="cv-header">
     <h1 class="name">Zakary Gaillard&#8209;Duchassin</h1>
@@ -41,17 +51,18 @@
         <a href="https://github.com/ZGaillard">ZGaillard</a>
       </li>
     </ul>
+    <p class="hint" id="hint" hidden></p>
   </header>
 
   <section id="profil">
     <h2>Profil</h2>
-    <p class="paragraph item" id="profil-resume">Étudiant à la maîtrise en informatique (recherche opérationnelle), je conçois des algorithmes d'optimisation (programmation linéaire en nombres entiers, génération de colonnes, branch-and-price) et des applications web complètes (React, Java, API REST). Co-auteur d'un article dans <i>Genome Biology</i> (2026). Je cherche un poste en développement axé sur l'algorithmique ou l'optimisation.</p>
+    <p class="paragraph" id="profil-resume">Étudiant à la maîtrise en informatique (recherche opérationnelle), je conçois des algorithmes d'optimisation (programmation linéaire en nombres entiers, génération de colonnes, branch-and-price) et des applications web complètes (React, Java, API REST). Co-auteur d'un article dans <i>Genome Biology</i> (2026). Je cherche un poste en développement axé sur l'algorithmique ou l'optimisation.</p>
   </section>
 
   <section id="formation">
     <h2>Formation</h2>
 
-    <article class="entry item" id="msc">
+    <article class="entry item" id="msc" data-skills="plne">
       <div class="entry-head">
         <h3>M.Sc. Informatique — recherche opérationnelle</h3>
         <p class="org">Université de Montréal</p>
@@ -60,9 +71,17 @@
       <ul>
         <li>Cours : méthodes de recherche opérationnelle, programmation en nombres entiers.</li>
       </ul>
+      <div class="more" id="msc-more"><div class="more-inner">
+        <table class="courses">
+          <caption>Cours de maîtrise</caption>
+          <tr><td>IFT 6575</td><td>Méthodes de recherche opérationnelle</td><td class="grade">A</td></tr>
+          <tr><td>IFT 6551</td><td>Programmation en nombres entiers</td><td class="grade"></td></tr>
+        </table>
+        <p>Département d'informatique et de recherche opérationnelle (DIRO), spécialisation recherche opérationnelle.</p>
+      </div></div>
     </article>
 
-    <article class="entry item" id="bsc">
+    <article class="entry item" id="bsc" data-skills="plne sql">
       <div class="entry-head">
         <h3>B.Sc. Informatique — cheminement Honor</h3>
         <p class="org">Université de Montréal</p>
@@ -72,24 +91,41 @@
         <li><strong>Moyenne cumulative : 3,89&nbsp;/&nbsp;4,3</strong> ; mention d'excellence à chaque trimestre.</li>
         <li>Cours réussis avec A+ : algorithmique, structures de données, optimisation linéaire, modèles de recherche opérationnelle, génie logiciel, bases de données, développement web, projet Honor.</li>
       </ul>
+      <div class="more" id="bsc-more"><div class="more-inner">
+        <table class="courses">
+          <caption>Cours réussis avec A+</caption>
+          <tr><td>IFT 2125</td><td>Introduction à l'algorithmique</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2015</td><td>Structures de données</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2505</td><td>Optimisation linéaire</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 1575</td><td>Modèles de recherche opérationnelle</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2255</td><td>Génie logiciel</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2935</td><td>Bases de données</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 1005</td><td>Design et développement web</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 3225</td><td>Technologie de l'Internet</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2105</td><td>Introduction à l'informatique théorique</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 2035</td><td>Concepts des langages de programmation</td><td class="grade">A+</td></tr>
+          <tr><td>IFT 4055</td><td>Projet informatique Honor (RIMap-RISC)</td><td class="grade">A+</td></tr>
+        </table>
+        <p>Aussi : apprentissage machine (IFT 3395, A), science des données (IFT 3700, A), systèmes d'exploitation (IFT 2245, A). Diplôme décerné en octobre 2025.</p>
+      </div></div>
     </article>
   </section>
 
   <section id="competences">
     <h2>Compétences</h2>
     <dl class="skills">
-      <div class="item" id="skill-langages"><dt>Langages</dt><dd>Java • Python • JavaScript/TypeScript • SQL • Bash</dd></div>
-      <div class="item" id="skill-ro"><dt>Optimisation / RO</dt><dd>PL/PLNE • Génération de colonnes • Branch-and-price • Google OR-Tools</dd></div>
-      <div class="item" id="skill-web"><dt>Web</dt><dd>React • API REST</dd></div>
-      <div class="item" id="skill-outils"><dt>Outils</dt><dd>Git/GitHub • GitHub Actions • Maven • JUnit • Linux • Jupyter • LaTeX</dd></div>
-      <div class="item" id="skill-langues"><dt>Langues</dt><dd>Français et anglais (bilingue) • Espagnol (fonctionnel)</dd></div>
+      <div><dt>Langages</dt><dd><span class="tag" data-skill="java">Java</span> • <span class="tag" data-skill="python">Python</span> • <span class="tag" data-skill="js">JavaScript/TypeScript</span> • <span class="tag" data-skill="sql">SQL</span> • <span class="tag" data-skill="bash">Bash</span></dd></div>
+      <div><dt>Optimisation / RO</dt><dd><span class="tag" data-skill="plne">PL/PLNE</span> • <span class="tag" data-skill="colgen">Génération de colonnes</span> • <span class="tag" data-skill="bnp">Branch-and-price</span> • <span class="tag" data-skill="ortools">Google OR-Tools</span></dd></div>
+      <div><dt>Web</dt><dd><span class="tag" data-skill="react">React</span> • <span class="tag" data-skill="rest">API REST</span></dd></div>
+      <div><dt>Outils</dt><dd><span class="tag" data-skill="git">Git/GitHub</span> • <span class="tag" data-skill="gha">GitHub Actions</span> • <span class="tag" data-skill="maven">Maven</span> • <span class="tag" data-skill="junit">JUnit</span> • <span class="tag" data-skill="linux">Linux</span> • <span class="tag" data-skill="jupyter">Jupyter</span> • <span class="tag" data-skill="latex">LaTeX</span></dd></div>
+      <div><dt>Langues</dt><dd>Français et anglais (bilingue) • Espagnol (fonctionnel)</dd></div>
     </dl>
   </section>
 
   <section id="experience">
     <h2>Expérience</h2>
 
-    <article class="entry item" id="rimap-risc">
+    <article class="entry item" id="rimap-risc" data-skills="js react rest">
       <div class="entry-head">
         <h3>Développeur full-stack — RIMap-RISC</h3>
         <p class="org">IRIC, laboratoire du Pr François Major</p>
@@ -101,13 +137,22 @@
         <li>Interface de requêtes interactive et visualisation en temps réel ; intégration avec un backend Java via une API REST.</li>
         <li>Co-auteur de l'article décrivant la plateforme, publié dans <i>Genome Biology</i> (2026).</li>
       </ul>
+      <div class="more" id="rimap-risc-more"><div class="more-inner">
+        <p>RIMap-RISC modélise toutes les interactions plausibles entre microARN et transcrits humains (annotations GENCODE v46, identifiants miRBase) : position, structure du duplex, énergie libre, constante de dissociation, accessibilité et conservation.</p>
+        <ul>
+          <li><strong>Frontend (ma contribution) :</strong> choix des paramètres (type de seed, seuil de K<sub>D</sub>, accessibilité, régions du transcrit, conservation) ou de trois modes prédéfinis (STRINGENT, DEFAULT, PERMISSIVE) ; affichage des résultats en temps réel avec visualisation de l'accessibilité, des structures secondaires et des annotations d'interaction.</li>
+          <li><strong>Architecture :</strong> frontend React, backend Java qui pilote le repliement d'ARN (MC-Flashfold), API REST publique et cache côté serveur pour les requêtes répétées.</li>
+          <li><strong>Parcours :</strong> projet Honor (hiver 2025) → stage d'été BRPC du CRSNG (été 2025) → maîtrise, jusqu'à la publication.</li>
+        </ul>
+        <p class="links"><a href="https://rimap-risc.major.iric.ca">Plateforme en ligne</a> · <a href="https://doi.org/10.1186/s13059-026-04008-y">Article</a></p>
+      </div></div>
     </article>
   </section>
 
   <section id="projets">
     <h2>Projets</h2>
 
-    <article class="entry item" id="bpmkp">
+    <article class="entry item" id="bpmkp" data-skills="java plne colgen bnp ortools maven junit jupyter git">
       <div class="entry-head">
         <h3>Solveur branch-and-price pour le sac à dos multiple</h3>
         <p class="org">Java • Google OR-Tools • Maven • JUnit 5</p>
@@ -119,18 +164,39 @@
         <li>Banc d'essai automatisé sur 179&nbsp;instances : 59&nbsp;% résolues à l'optimalité prouvée, temps médian de 0,64&nbsp;s ; analyse des résultats en Jupyter.</li>
         <li>Code source : <a href="https://github.com/ZGaillard/BPMKP">github.com/ZGaillard/BPMKP</a></li>
       </ul>
+      <div class="more" id="bpmkp-more"><div class="more-inner">
+        <div class="stats">
+          <div><b>179</b><span>instances</span></div>
+          <div><b>58,7&nbsp;%</b><span>optimalité prouvée</span></div>
+          <div><b>0,64&nbsp;s</b><span>temps médian</span></div>
+          <div><b>3</b><span>nœuds (médiane)</span></div>
+        </div>
+        <ol class="flow">
+          <li><strong>Master de Dantzig–Wolfe</strong> construit à partir de la relaxation L2, initialisé avec des motifs gloutons.</li>
+          <li><strong>Génération de colonnes :</strong> résolution du master restreint (OR-Tools), lecture des variables duales, sous-problème de sac à dos pour ajouter les motifs rentables.</li>
+          <li><strong>Branch-and-price best-first</strong> sur les variables de sélection d'objets fractionnaires, avec élagage par bornes.</li>
+          <li><strong>Réparation :</strong> quand la sélection est entière mais l'affectation fractionnaire, un modèle CP-SAT vérifie la faisabilité ; les ensembles infaisables deviennent des coupes no-good.</li>
+        </ol>
+        <p>Banc d'essai (limite de 600&nbsp;s, écart de 1&nbsp;%) : 41,3&nbsp;% des instances arrêtées à l'écart de 1&nbsp;% ; temps moyen 12,7&nbsp;s, 90<sup>e</sup> centile 38&nbsp;s, maximum 204&nbsp;s.</p>
+      </div></div>
     </article>
   </section>
 
   <section id="publication">
     <h2>Publication</h2>
-    <p class="paragraph item" id="pub-rimap">Chasles S., <strong>Gaillard-Duchassin Z.</strong>, Quenneville J., Lemaire M., Gagnon E., Major F. (2026). RIMap-RISC: a transcriptome-wide database of structurally modeled human microRNA interactions. <i>Genome Biology</i>. <a href="https://doi.org/10.1186/s13059-026-04008-y">doi:10.1186/s13059-026-04008-y</a></p>
+    <div class="item" id="pub-rimap">
+      <p class="paragraph">Chasles S., <strong>Gaillard-Duchassin Z.</strong>, Quenneville J., Lemaire M., Gagnon E., Major F. (2026). RIMap-RISC: a transcriptome-wide database of structurally modeled human microRNA interactions. <i>Genome Biology</i>. <a href="https://doi.org/10.1186/s13059-026-04008-y">doi:10.1186/s13059-026-04008-y</a></p>
+      <div class="more" id="pub-rimap-more"><div class="more-inner">
+        <p>Base de données accessible par le web qui modélise, à l'échelle du transcriptome humain, le ciblage des ARN messagers par les microARN, en intégrant la prédiction de la structure du duplex dans un cadre biophysique qui reproduit l'architecture du complexe RISC.</p>
+        <p><strong>Ma contribution :</strong> le frontend de la plateforme (avec F. Major), et la rédaction et la révision du manuscrit avec les autres auteurs.</p>
+      </div></div>
+    </div>
   </section>
 
   <section id="enseignement">
     <h2>Expérience en enseignement</h2>
 
-    <article class="entry item" id="ta-ift1025">
+    <article class="entry item" id="ta-ift1025" data-skills="java git">
       <div class="entry-head">
         <h3>Auxiliaire d'enseignement</h3>
         <p class="org">Université de Montréal</p>
@@ -139,6 +205,12 @@
       <ul>
         <li>Encadrement pédagogique et soutien en programmation pour le cours IFT1025 — Programmation 2.</li>
       </ul>
+      <div class="more" id="ta-ift1025-more"><div class="more-inner">
+        <ul>
+          <li>Gabarit du TP1 en Java (simulation d'un écosystème) : programmation orientée objet, architecture MVC, générateur aléatoire déterministe, travail collaboratif sur GitHub.</li>
+          <li>Dépôt d'exemple pour initier les étudiants à Git et GitHub.</li>
+        </ul>
+      </div></div>
     </article>
 
     <article class="entry item" id="studioxp">
@@ -174,13 +246,10 @@
 
 </main>
 
-<script>
-  // Assemble the e-mail address at runtime so naive scrapers don't harvest it.
-  document.querySelectorAll('.js-email').forEach(function (a) {
-    var addr = a.dataset.u + '@' + a.dataset.d;
-    a.href = 'mailto:' + addr;
-    a.textContent = addr;
-  });
-</script>
+<div class="filterbar" id="filterbar" role="status" aria-live="polite" hidden>
+  <button type="button" id="filterbar-text" class="filterbar-text"></button>
+  <button type="button" id="filterbar-clear" aria-label="Retirer le filtre">✕</button>
+</div>
+
 </body>
 </html>
